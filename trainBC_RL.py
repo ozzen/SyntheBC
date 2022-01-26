@@ -39,17 +39,17 @@ def bound(n, minn, maxn):
 
 # generates initial configuration
 def D1(flag):
-    i_d = np.random.uniform(low=low_d, high=high_d)   # d-current
-    i_q = np.random.uniform(low=low_q, high=high_q)   # q-current
-    i_od = np.random.uniform(low=low_d, high=high_d)  # d-o/p of inverter
-    i_oq = np.random.uniform(low=low_q, high=high_q)  # q-o/p of inverter
+    i_d = np.random.uniform(low=low_d, high=high_d)
+    i_q = np.random.uniform(low=low_q, high=high_q)
+    i_od = np.random.uniform(low=low_d, high=high_d)
+    i_oq = np.random.uniform(low=low_q, high=high_q)
     if flag % 2 == 0:
-        v_od = np.random.uniform(low=v_ref-v_fsc-v_init, high=v_ref-v_fsc)  # d-i/p to voltage controller
+        v_od = np.random.uniform(low=v_ref-v_fsc-v_init, high=v_ref-v_fsc)
     else:
-        v_od = np.random.uniform(low=v_ref+v_fsc, high=v_ref+v_fsc+v_init)  # d-i/p to voltage controller
-    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)  # q-i/p to voltage controller
-    i_ld = np.random.uniform(low=low_d, high=high_d)  # d-i/p to current controller
-    i_lq = np.random.uniform(low=0, high=0)  # q-i/p to current controller
+        v_od = np.random.uniform(low=v_ref+v_fsc, high=v_ref+v_fsc+v_init)
+    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)
+    i_ld = np.random.uniform(low=low_d, high=high_d)
+    i_lq = np.random.uniform(low=0, high=0)
     m_d = np.random.uniform(low=low_md, high=high_md)
     m_q = np.random.uniform(low=low_mq, high=high_mq)
 
@@ -58,14 +58,14 @@ def D1(flag):
     return state, dataset
 
 def D2():
-    i_d = np.random.uniform(low=low_d, high=high_d)  # d-current
-    i_q = np.random.uniform(low=low_q, high=high_q)  # q-current
-    i_od = np.random.uniform(low=low_d, high=high_d)  # d-o/p of inverter
-    i_oq = np.random.uniform(low=low_q, high=high_q)  # q-o/p of inverter
-    v_od = np.random.uniform(low=v_ref-v_init, high=v_ref+v_init)  # d-i/p to voltage controller
-    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)  # q-i/p to voltage controller
-    i_ld = np.random.uniform(low=low_d, high=high_d)  # d-i/p to current controller
-    i_lq = np.random.uniform(low=0, high=0)  # q-i/p to current controller
+    i_d = np.random.uniform(low=low_d, high=high_d)
+    i_q = np.random.uniform(low=low_q, high=high_q)
+    i_od = np.random.uniform(low=low_d, high=high_d)
+    i_oq = np.random.uniform(low=low_q, high=high_q)
+    v_od = np.random.uniform(low=v_ref-v_init, high=v_ref+v_init)
+    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)
+    i_ld = np.random.uniform(low=low_d, high=high_d)
+    i_lq = np.random.uniform(low=0, high=0)
     m_d = np.random.uniform(low=low_md, high=high_md)
     m_q = np.random.uniform(low=low_mq, high=high_mq)
 
@@ -74,14 +74,14 @@ def D2():
     return state, dataset
 
 def D3():
-    i_d = np.random.uniform(low=low_d, high=high_d)  # d-current
-    i_q = np.random.uniform(low=low_q, high=high_q)  # q-current
-    i_od = np.random.uniform(low=low_d, high=high_d)  # d-o/p of inverter
-    i_oq = np.random.uniform(low=low_q, high=high_q)  # q-o/p of inverter
-    v_od = np.random.uniform(low=v_ref-v_fsc, high=v_ref+v_fsc)  # d-i/p to voltage controller
-    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)  # q-i/p to voltage controller
-    i_ld = np.random.uniform(low=low_d, high=high_d)  # d-i/p to current controller
-    i_lq = np.random.uniform(low=0, high=0)  # q-i/p to current controller
+    i_d = np.random.uniform(low=low_d, high=high_d)
+    i_q = np.random.uniform(low=low_q, high=high_q)
+    i_od = np.random.uniform(low=low_d, high=high_d)
+    i_oq = np.random.uniform(low=low_q, high=high_q)
+    v_od = np.random.uniform(low=v_ref-v_fsc, high=v_ref+v_fsc)
+    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)
+    i_ld = np.random.uniform(low=low_d, high=high_d)
+    i_lq = np.random.uniform(low=0, high=0)
     m_d = np.random.uniform(low=low_md, high=high_md)
     m_q = np.random.uniform(low=low_mq, high=high_mq)
 
