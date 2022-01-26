@@ -1,0 +1,93 @@
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import load_model
+
+model = load_model('1/candidateBC.h5')
+
+# rtds constraints
+high_d = 0.69
+low_d = 0.68
+high_q = 1e-5
+low_q = -1e-5
+high_md = 0.39
+low_md = 0.38
+high_mq = 0.055
+low_mq = 0.052
+high_v_oq = 0.008
+low_v_oq = 0.007
+v_ref = 0.48
+v_init = 0.01*v_ref
+v_fsc = 0.03*v_ref
+
+def D1(flag):
+    i_d = np.random.uniform(low=low_d, high=high_d)   # d-current
+    i_q = np.random.uniform(low=low_q, high=high_q)   # q-current
+    i_od = np.random.uniform(low=low_d, high=high_d)  # d-o/p of inverter
+    i_oq = np.random.uniform(low=low_q, high=high_q)  # q-o/p of inverter
+    if flag % 2 == 0:
+        v_od = np.random.uniform(low=v_ref-v_fsc-v_init, high=v_ref-v_fsc)  # d-i/p to voltage controller
+    else:
+        v_od = np.random.uniform(low=v_ref+v_fsc, high=v_ref+v_fsc+v_init)  # d-i/p to voltage controller
+    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)  # q-i/p to voltage controller
+    i_ld = np.random.uniform(low=low_d, high=high_d)  # d-i/p to current controller
+    i_lq = np.random.uniform(low=0, high=0)  # q-i/p to current controller
+    m_d = np.random.uniform(low=low_md, high=high_md)
+    m_q = np.random.uniform(low=low_mq, high=high_mq)
+
+    state = np.array([i_d, i_q, i_od, i_oq, v_od, v_oq, i_ld, i_lq, m_d, m_q])
+    dataset = 1
+    return state, dataset
+
+def D2():
+    i_d = np.random.uniform(low=low_d, high=high_d)  # d-current
+    i_q = np.random.uniform(low=low_q, high=high_q)  # q-current
+    i_od = np.random.uniform(low=low_d, high=high_d)  # d-o/p of inverter
+    i_oq = np.random.uniform(low=low_q, high=high_q)  # q-o/p of inverter
+    v_od = np.random.uniform(low=v_ref-v_init, high=v_ref+v_init)  # d-i/p to voltage controller
+    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)  # q-i/p to voltage controller
+    i_ld = np.random.uniform(low=low_d, high=high_d)  # d-i/p to current controller
+    i_lq = np.random.uniform(low=0, high=0)  # q-i/p to current controller
+    m_d = np.random.uniform(low=low_md, high=high_md)
+    m_q = np.random.uniform(low=low_mq, high=high_mq)
+
+    state = np.array([i_d, i_q, i_od, i_oq, v_od, v_oq, i_ld, i_lq, m_d, m_q])
+    dataset = 2
+    return state, dataset
+
+def D3():
+    i_d = np.random.uniform(low=low_d, high=high_d)  # d-current
+    i_q = np.random.uniform(low=low_q, high=high_q)  # q-current
+    i_od = np.random.uniform(low=low_d, high=high_d)  # d-o/p of inverter
+    i_oq = np.random.uniform(low=low_q, high=high_q)  # q-o/p of inverter
+    v_od = np.random.uniform(low=v_ref-v_fsc, high=v_ref+v_fsc)  # d-i/p to voltage controller
+    v_oq = np.random.uniform(low=low_v_oq, high=high_v_oq)  # q-i/p to voltage controller
+    i_ld = np.random.uniform(low=low_d, high=high_d)  # d-i/p to current controller
+    i_lq = np.random.uniform(low=0, high=0)  # q-i/p to current controller
+    m_d = np.random.uniform(low=low_md, high=high_md)
+    m_q = np.random.uniform(low=low_mq, high=high_mq)
+
+    state = np.array([i_d, i_q, i_od, i_oq, v_od, v_oq, i_ld, i_lq, m_d, m_q])
+    dataset = 3
+    return state, dataset
+
+for i in range(100):
+    state, dataset = D1(1)
+    state_tf = tf.expand_dims(tf.convert_to_tensor(state), 0)
+    action = model.predict(state_tf)
+    u = float(action[0])
+    if dataset == 1:
+        if u > 0:
+            R = True
+        else:
+            R = False
+    if dataset == 2:
+        if u <= 0:
+            R = True
+        else:
+            R = False
+    if dataset == 3:
+        if u <= 0 and u >= -0.001:
+            R = True
+        else:
+            R = False
+    print(R)
