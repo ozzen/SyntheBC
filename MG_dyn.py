@@ -40,7 +40,6 @@ def control(flag):
     state = np.array([i_d, i_q, i_od, i_oq, v_od, v_oq, i_ld, i_lq, m_d, m_q])
     return state
 
-
 # model dynamics
 def f(x):
     x1,x2,x3,x4,x5,x6,x7,x8,x9,x10 = x
