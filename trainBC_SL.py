@@ -118,7 +118,7 @@ df4['u'] = pd.Series([np.random.uniform(-0.001,0) for x in range(len(df4.index))
 
 df5 = pd.DataFrame(unsafe1, columns=['i_d', 'i_q', 'i_od', 'i_oq', 'v_od', 'v_oq', 'i_ld', 'i_lq', 'm_d', 'm_q'])
 df5['u'] = pd.Series([np.random.uniform(0.0001,0.01) for x in range(len(df5.index))])
-df6 = pd.DataFrame(unsafe1, columns=['i_d', 'i_q', 'i_od', 'i_oq', 'v_od', 'v_oq', 'i_ld', 'i_lq', 'm_d', 'm_q'])
+df6 = pd.DataFrame(unsafe2, columns=['i_d', 'i_q', 'i_od', 'i_oq', 'v_od', 'v_oq', 'i_ld', 'i_lq', 'm_d', 'm_q'])
 df6['u'] = pd.Series([np.random.uniform(0.0001,0.01) for x in range(len(df6.index))])
 
 frames = [df1, df2, df3, df4, df5, df6]
