@@ -18,9 +18,9 @@ low_md = 0.36
 v_unsafe1 = 0.36
 v_unsafe2 = 0.60
 v_lb = 0.4657
-v_ub = 0.4943
+v_ub = 0.4942
 v_fsc = 0.03*v_ref
-v_safe1 = 0.4660
+v_safe1 = 0.4659
 v_safe2 = 0.4940
 
 # generates initial configuration
@@ -88,19 +88,19 @@ safe2 = []
 safe3 = []
 safe4 = []
 
-for i in range(500000):
+for i in range(500):
     state, dataset = D1(0)
     unsafe1.append(state)
     state, dataset = D1(1)
     unsafe2.append(state)
 
-for i in range(500000):
+for i in range(500):
     state, dataset = D2(0)
     safe1.append(state)
     state, dataset = D2(1)
     safe2.append(state)
 
-for i in range(500000):
+for i in range(500):
     state, dataset = D3(0)
     safe3.append(state)
     state, dataset = D3(1)
@@ -153,7 +153,7 @@ model.compile(optimizer='adam', loss='mean_squared_error', metrics =['accuracy']
 model.summary()
 
 #training
-history = model.fit(X_train, Y_train, batch_size=2000, epochs=2000, verbose=1)
+history = model.fit(X_train, Y_train, batch_size=1000, epochs=1000, verbose=1)
 
 #training error visualization
 # plt.plot(history.history['val_loss'])
@@ -165,5 +165,5 @@ plt.xlabel('Epoch')
 plt.show()
 
 #saving NN model
-model.save("Results/candidateBC_1.h5")
+model.save("Results/candidateBC.h5")
 # model.save_weights("Results/candidateBC_weights.h5")
